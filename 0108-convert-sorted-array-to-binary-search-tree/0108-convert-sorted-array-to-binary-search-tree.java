@@ -26,8 +26,19 @@ class Solution {
         return root;
     }
     
+    public TreeNode postOrderBST(int left, int right){
+        if(left > right)
+            return null;
+        int mid = (left + right) / 2;
+        TreeNode root = new TreeNode(nums[mid]);
+        root.right = preOrderBST(mid+1, right);
+        root.left = preOrderBST(left, mid-1);
+        return root;
+    }
+    
     public TreeNode sortedArrayToBST(int[] nums) {
         this.nums = nums;
-        return preOrderBST(0, nums.length-1);
+        //return preOrderBST(0, nums.length-1);
+        return postOrderBST(0, nums.length-1);
     }
 }
