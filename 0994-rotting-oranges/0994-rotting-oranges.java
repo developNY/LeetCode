@@ -1,64 +1,36 @@
 class Solution {  
-    int[][] grid = null;
-    boolean[][] visited = null;
-    Queue<List<Integer>> queue = new LinkedList<>();
-    
-    public void rotten(int row, int col){
-        if(row<0 || row>= grid.length || col<0 || col>= grid[0].length || visited[row][col] || grid[row][col] == 0)
-            return;
-        
-        if(grid[row][col] == 1 && !visited[row][col]){
-            List<Integer> tmp = new ArrayList<>();
-            tmp.add(row);
-            tmp.add(col);
-            queue.add(tmp);
-            grid[row][col] = 2;
-            visited[row][col] = true;
-        }
-    }
-    
     public int orangesRotting(int[][] grid) {
-        int res = 0;
-        int row = grid.length, col = grid[0].length;
-        this.grid = grid;
-        this.visited = new boolean[row][col];
-        
-        for(int i=0; i<row; i++){
-            for(int j=0; j<col; j++){
-                if(grid[i][j] == 2){
-                    List<Integer> tmp = new ArrayList<>();
-                    tmp.add(i);
-                    tmp.add(j);
-                    queue.add(tmp);
-                    visited[i][j] = true;
+        int m = grid.length, n = grid[0].length;
+        Queue<int[]> queue = new LinkedList<>();
+        int fresh = 0;
+
+        for (int i = 0; i < m; i += 1) {
+            for (int j = 0; j < n; j += 1) {
+                if (grid[i][j] == 2) queue.offer(new int[] { i, j }); else if (
+                    grid[i][j] == 1
+                ) fresh += 1;
+            }
+        }
+
+        int count = 0;
+        int[][] dirs = { { 1, 0 }, { -1, 0 }, { 0, 1 }, { 0, -1 } };
+        while (!queue.isEmpty() && fresh != 0) {
+            count += 1;
+            int sz = queue.size();
+            for (int i = 0; i < sz; i += 1) {
+                int[] rotten = queue.poll();
+                int r = rotten[0], c = rotten[1];
+                for (int[] dir : dirs) {
+                    int x = r + dir[0], y = c + dir[1];
+                    if (0 <= x && x < m && 0 <= y && y < n && grid[x][y] == 1) {
+                        grid[x][y] = 2;
+                        queue.offer(new int[] { x, y });
+                        fresh -= 1;
+                    }
                 }
             }
         }
-        
-        while(!queue.isEmpty()){
-            int size = queue.size();
-            
-            for(int i=0; i<size; i++){
-                List<Integer> tmp = queue.poll();
-                int tmpRow = tmp.get(0);
-                int tmpCol = tmp.get(1);
-                
-                rotten(tmpRow+1, tmpCol);
-                rotten(tmpRow-1, tmpCol);
-                rotten(tmpRow, tmpCol+1);
-                rotten(tmpRow, tmpCol-1);
-            }
-            res++;
-        }
-        
-        for(int i=0; i<row; i++){
-            for(int j=0; j<col; j++){
-                if(grid[i][j] == 1){
-                    return -1;
-                }
-            }
-        }
-        
-        return res == 0? 0 : res-1;
+        return fresh == 0 ? count : -1;
     }
+
 }
