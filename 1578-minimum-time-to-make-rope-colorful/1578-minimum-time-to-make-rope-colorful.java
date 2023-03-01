@@ -1,31 +1,24 @@
 class Solution {
     public int minCost(String colors, int[] neededTime) {
-        int time = 0;
-        Stack<Map<Character, Integer>> stack = new Stack<>();
-        Map<Character, Integer> map = new HashMap<>();
-        map.put(colors.charAt(0), neededTime[0]);
-        stack.push(map);
+        int l=0, r=1, time = 0;
         
-        for(int i=1; i<colors.length(); i++){
-            char c = colors.charAt(i);
-            Map<Character, Integer> tmp = stack.peek();
-            
-            if(tmp.containsKey(c)){
-                if(neededTime[i] < tmp.get(c)){
-                    time += neededTime[i];
-                }else{
-                    stack.pop();
-                    time+= tmp.get(c);
-                    Map<Character, Integer> tmpMap = new HashMap<>();
-                    tmpMap.put(c, neededTime[i]);
-                    stack.push(tmpMap);
-                }
+        while(l<colors.length() && r<colors.length()){
+            if(colors.charAt(l) != colors.charAt(r)){
+                l++; r++;
             }else{
-                Map<Character, Integer> tmpMap = new HashMap<>();
-                tmpMap.put(c, neededTime[i]);
-                stack.push(tmpMap);
+                int total = neededTime[l];
+                int max = neededTime[l];
+                while(l<colors.length() && r<colors.length() && colors.charAt(l) == colors.charAt(r)){
+                    total += neededTime[r];
+                    max = Math.max(max, neededTime[r]);
+                    r++;
+                }
+                time += total - max;
+                l = r;
+                r++;
             }
         }
+        
         return time;
     }
 }
