@@ -1,13 +1,4 @@
 class Solution {
-	public boolean exist(char[][] board, String word) {
-		for(int r = 0; r < board.length; r++){
-			for(int c = 0; c < board[0].length; c++){
-				if(dfs(r, c, 0, board, word, new boolean[board.length][board[0].length]))                                                   return true;
-			}
-		}
-		return false;    
-	}
-
 	public boolean dfs(int row, int col, int wordidx, char[][] board, String word, boolean[][] visited) {        
 		if(wordidx >= word.length())
             return true;
@@ -30,5 +21,14 @@ class Solution {
 		
 		visited[row][col] = false;
 		return false;
+	}
+    
+    public boolean exist(char[][] board, String word) {
+		for(int r = 0; r < board.length; r++){
+			for(int c = 0; c < board[0].length; c++){
+				if(dfs(r, c, 0, board, word, new boolean[board.length][board[0].length]))                                                   return true;
+			}
+		}
+		return false;    
 	}
 }
