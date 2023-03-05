@@ -1,13 +1,11 @@
 class Solution {
-	public boolean dfs(int row, int col, int wordidx, char[][] board, String word, boolean[][] visited) {        
+	public boolean dfs(int row, int col, int wordidx, char[][] board, String word, boolean[][] visited) {       
 		if(wordidx >= word.length())
             return true;
         if(row < 0 || row >= board.length || col < 0 || col >= board[0].length || visited[row][col] || board[row][col] != word.charAt(wordidx) )
 			return false;         
-            
-		//if(wordInd == word.length() - 1){ return true; }
-		
-        visited[row][col] = true;                                                                // mark it as visited now     
+
+        visited[row][col] = true;
         
 		if(dfs(row+1, col, wordidx+1, board, word, visited))
             return true;
@@ -17,7 +15,6 @@ class Solution {
             return true;
         if(dfs(row, col-1, wordidx+1, board, word, visited))
             return true;
-		
 		
 		visited[row][col] = false;
 		return false;
