@@ -6,14 +6,13 @@ class Solution {
 				}
 			}
 		}
-		return false;                                                                             // if we traveresed all chars of board, it means we did not find all chars of word. so return false
+		return false;    
 	}
-	// ----------------------------------------------------------------------------------------------------------------------------------------------- //
-	public boolean dfsBoard(char[][] board, boolean[][] visitedBoard, int row, int col, String word, int wordInd) {        			
-		if( (row < 0 || row >= board.length)   ||   (col < 0 || col >= board[0].length)  ||   board[row][col] != word.charAt(wordInd) ){
-			return false;                                                                             // return false, if:  a)  row or col goes out of bound.  b) char in board != char in word 
-		}
-		if(visitedBoard[row][col] ){ return false; }                                                  // this element already visited, so don't do DFS on this
+
+	public boolean dfsBoard(char[][] board, boolean[][] visitedBoard, int row, int col, String word, int wordInd) {        
+		if(row < 0 || row >= board.length || col < 0 || col >= board[0].length || visitedBoard[row][col] || board[row][col] != word.charAt(wordInd) )
+			return false;         
+            
 		if(wordInd == word.length() - 1){ return true; }
 		visitedBoard[row][col] = true;                                                                // mark it as visited now             
 			
