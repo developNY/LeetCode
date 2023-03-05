@@ -10,10 +10,12 @@ class Solution {
 	}
 
 	public boolean dfsBoard(char[][] board, boolean[][] visitedBoard, int row, int col, String word, int wordInd) {        
-		if(row < 0 || row >= board.length || col < 0 || col >= board[0].length || visitedBoard[row][col] || board[row][col] != word.charAt(wordInd) )
+		if(wordInd >= word.length())
+            return true;
+        if(row < 0 || row >= board.length || col < 0 || col >= board[0].length || visitedBoard[row][col] || board[row][col] != word.charAt(wordInd) )
 			return false;         
             
-		if(wordInd == word.length() - 1){ return true; }
+		//if(wordInd == word.length() - 1){ return true; }
 		
         visitedBoard[row][col] = true;                                                                // mark it as visited now     
         
