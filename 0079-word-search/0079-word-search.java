@@ -14,12 +14,15 @@ class Solution {
 			return false;         
             
 		if(wordInd == word.length() - 1){ return true; }
-		visitedBoard[row][col] = true;                                                                // mark it as visited now             
-			
+		
+        visitedBoard[row][col] = true;                                                                // mark it as visited now     
+        
+		if( dfsBoard(board, visitedBoard, row+1, col, word, wordInd + 1) ){ return true; }            // DFS on Below
+        if( dfsBoard(board, visitedBoard, row-1, col, word, wordInd + 1) ){ return true; }            // DFS on ABove	
 		if( dfsBoard(board, visitedBoard, row, col-1, word, wordInd + 1) ){ return true; }            // DFS on Left
 		if( dfsBoard(board, visitedBoard, row, col+1, word, wordInd + 1) ){ return true; }            // DFS on Right
-		if( dfsBoard(board, visitedBoard, row-1, col, word, wordInd + 1) ){ return true; }            // DFS on ABove
-		if( dfsBoard(board, visitedBoard, row+1, col, word, wordInd + 1) ){ return true; }            // DFS on Below
+		
+		
 		visitedBoard[row][col] = false;
 		return false;
 	}
