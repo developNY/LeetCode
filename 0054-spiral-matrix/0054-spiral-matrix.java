@@ -16,13 +16,15 @@ class Solution {
                 for(int i=r; i>=l; i--)
                     result.add(matrix[b][i]); 
                 b--;
-            }
+            }else
+                return result;
             
             if(l <= r){
                 for(int i=b; i>=t; i--)
                     result.add(matrix[i][l]);
                 l++;
-            }
+            }else
+                return result;
         }
         return result;
     }
