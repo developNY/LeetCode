@@ -15,8 +15,8 @@ class Solution {
             if(t <= b){
                 for(int i=r; i>=l; i--)
                     result.add(matrix[b][i]); 
+                b--;
             }
-            b--;
             
             if(l <= r){
                 for(int i=b; i>=t; i--)
