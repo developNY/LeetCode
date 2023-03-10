@@ -3,8 +3,9 @@ class Solution {
         int l = 0, r = matrix[0].length-1;
         
         while(l<r){
+            int top = l, bottom = r;
             for(int i=0; i<r-l; i++){
-                int top = l, bottom = r;
+                
                 
                 int tmp = matrix[top][l+i];
                 
