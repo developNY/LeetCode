@@ -14,6 +14,6 @@ class Solution {
                     dp[amt] = Math.min(dp[amt], 1+dp[amt-coin]);
             }
         }
-        return dp[amount] <= amount ? dp[amount] : -1;
+        return dp[amount] != amount+1 ? dp[amount] : -1;
     }
 }
