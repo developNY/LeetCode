@@ -1,36 +1,25 @@
 class Solution {
     public String longestPalindrome(String s) {
-        String str = "";
+       String res = "";
 
-        for(int mid=0; mid<s.length(); mid++){
-            //OddPalindrome
-            int l = mid, r = mid;
-            String oddP = "";
-            while(l>=0 && r<s.length() && s.charAt(l) == s.charAt(r)){
-                oddP = s.substring(l, r+1);
-                l--; r++;
-            }
-            
-            //EvenPalindrome
-            l=mid; r = mid+1;
-            String evenP = "";
-            while(l>=0 && r<s.length() && s.charAt(l) == s.charAt(r)){
-                evenP = s.substring(l, r+1);
-                l--; r++;
-            }
-            
-            //Compare
-            if(oddP.length() > evenP.length()){
-                if(str.length() < oddP.length()){
-                    str = oddP;
-                }
-            }else{
-                if(str.length() < evenP.length()){
-                    str = evenP;
-                }
-            }
+       for(int i=0; i<s.length(); i++){
+        // Odd Palindrome check
+           int l=i, r=i;
+           String oddPalindrome = "";
+           while(l>=0 && r<s.length() && s.charAt(l) == s.charAt(r)){
+               oddPalindrome = s.substring(l,r+1);
+               l--; r++;
+           }
+        // Even Palindrome check
+           l=i; r=i+1;
+           String evenPalindrome = "";
+           while(l>=0 && r<s.length() && s.charAt(l) == s.charAt(r)){
+               evenPalindrome = s.substring(l,r+1);
+               l--; r++;
+           }
+           String tmp = oddPalindrome.length() > evenPalindrome.length() ? oddPalindrome : evenPalindrome;
+           res = res.length() > tmp.length() ? res : tmp;
         }
-        
-        return str;
+        return res;
     }
 }
