@@ -1,5 +1,4 @@
 class Solution {
-
     public int coinChange(int[] coins, int amount) {
         if (amount < 0 || coins.length == 0 || coins == null) {
             return 0;
