@@ -4,8 +4,8 @@ public class Solution {
 
         int left = 0;
         int right = 0;
-
         int res = 0;
+        
         while (right < s.length()) {
             char r = s.charAt(right);
             chars.put(r, chars.getOrDefault(r,0) + 1);
