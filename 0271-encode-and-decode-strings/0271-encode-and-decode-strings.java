@@ -18,8 +18,8 @@ public class Codec {
         while(i<s.length()){
             int slash = s.indexOf('/', i);
             int size = Integer.valueOf(s.substring(i, slash));
-            i = slash + size + 1;
-            result.add(s.substring(slash + 1, i));
+            i = slash+size+1;
+            result.add(s.substring(slash+1, i));
         }
         
         return result;
