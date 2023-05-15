@@ -5,9 +5,8 @@ class Solution {
             return false;
         
         Stack<Character> stack = new Stack<>();
-        stack.add(c);
         
-        for(int i=1; i<s.length(); i++){
+        for(int i=0; i<s.length(); i++){
             char c2 = s.charAt(i);
             if(c2==')' || c2=='}' || c2==']'){
                 if(stack.isEmpty())
