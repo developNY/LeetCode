@@ -1,7 +1,7 @@
 class Solution {
     public boolean isValid(String s) {
         char c = s.charAt(0);
-        if(s.length()%2 != 0 || c == ')' || c == ']' || c == '}')
+        if(s.length()%2 != 0)
             return false;
         
         Stack<Character> stack = new Stack<>();
