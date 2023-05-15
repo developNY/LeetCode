@@ -1,7 +1,7 @@
 class Solution {
     public boolean isValid(String s) {
         char c = s.charAt(0);
-        if(s.length()%2 != 0)
+        if(s.length()%2 != 0 || c == ')' || c == ']' || c == '}')
             return false;
         
         Stack<Character> stack = new Stack<>();
@@ -12,11 +12,7 @@ class Solution {
                 if(stack.isEmpty())
                     return false;
                 char pop = stack.pop();
-                if(c2==')' && pop != '(')
-                    return false;
-                else if(c2==']' && pop != '[')
-                    return false;
-                else if(c2=='}' && pop != '{')
+                if((c2==')' && pop != '(') || (c2==']' && pop != '[') ||(c2=='}' && pop != '{'))
                     return false;
             }else
                 stack.add(c2);
