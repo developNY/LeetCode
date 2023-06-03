@@ -1,19 +1,15 @@
-
 class Solution {
-    // two pointer
     public boolean isPalindrome(String s) {
-        int l=0, r=s.length()-1;
         s = s.toLowerCase();
+        int l=0, r=s.length()-1;
         while(l<r){
-            if(!Character.isLetterOrDigit(s.charAt(l)))
+            while(!Character.isLetterOrDigit(s.charAt(l)) && l<r)
                 l++;
-            else if(!Character.isLetterOrDigit(s.charAt(r)))
+            while(!Character.isLetterOrDigit(s.charAt(r)) && l<r)
                 r--;
-            else if(s.charAt(l) != s.charAt(r))
+            if(s.charAt(l) != s.charAt(r))
                 return false;
-            else{
-                l++; r--;
-            }
+            l++; r--;
         }
         return true;
     }
