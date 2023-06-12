@@ -17,29 +17,40 @@ class Solution {
     public int maxDepth(TreeNode root) {
         if(root == null)
             return 0;
-
-        int depth = 1;
-        Stack<TreeNode> nodes = new Stack<>();
-        Stack<Integer> depths = new Stack<>();
-        nodes.add(root);
-        depths.add(depth);
-
-        while(!nodes.isEmpty()){
-            TreeNode tmp = nodes.pop();
-            int d = depths.pop();
-            depth = Math.max(depth, d);
-
-            if(tmp.left != null){
-                nodes.add(tmp.left);
-                depths.add(d+1);
-            }
-            if(tmp.right!= null){
-                nodes.add(tmp.right);
-                depths.add(d+1);
-            }
-        }
-        return depth;
+        return depth(root);
     }
+
+    public int depth(TreeNode root){
+        if(root == null)
+            return 0;
+        return Math.max(depth(root.left)+1, depth(root.right)+1);
+    }
+
+    // DFS
+    // if(root == null)
+    //         return 0;
+
+    //     int depth = 1;
+    //     Stack<TreeNode> nodes = new Stack<>();
+    //     Stack<Integer> depths = new Stack<>();
+    //     nodes.add(root);
+    //     depths.add(depth);
+
+    //     while(!nodes.isEmpty()){
+    //         TreeNode tmp = nodes.pop();
+    //         int d = depths.pop();
+    //         depth = Math.max(depth, d);
+
+    //         if(tmp.left != null){
+    //             nodes.add(tmp.left);
+    //             depths.add(d+1);
+    //         }
+    //         if(tmp.right!= null){
+    //             nodes.add(tmp.right);
+    //             depths.add(d+1);
+    //         }
+    //     }
+    //     return depth;
 
     // BFS - Queue
     // public int maxDepth(TreeNode root) {
