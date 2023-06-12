@@ -14,12 +14,10 @@ public class Solution {
         if(head == null)
             return false;
         ListNode next = head.next;
-        while(next != null){
+        while(next != null && next.next != null){
             if(head == next)
                 return true;
             head = head.next;
-            if(next.next == null || next.next.next == null)
-                return false;
             next = next.next.next;
         }
 
