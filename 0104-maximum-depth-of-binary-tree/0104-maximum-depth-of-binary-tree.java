@@ -17,10 +17,34 @@ class Solution {
     public int maxDepth(TreeNode root) {
         if(root == null)
             return 0;
-        return Math.max(maxDepth(root.left), maxDepth(root.right))+1;
+
+        int max = 0;
+        Queue<TreeNode> q = new LinkedList<>();
+        q.add(root);
+
+        while(!q.isEmpty()){
+            int qSize = q.size();
+            for(int i=0; i<qSize; i++){
+                TreeNode node = q.poll();
+                if(node.left != null)
+                    q.add(node.left);
+                if(node.right != null)
+                    q.add(node.right);
+            }
+            max++;
+        }
+
+        return max;
     }
 
-    // DFS
+    // DFS - recursive
+    // public int maxDepth(TreeNode root) {
+    //     if(root == null)
+    //         return 0;
+    //     return Math.max(maxDepth(root.left), maxDepth(root.right))+1;
+    // }
+
+    // DFS - Iteration
     // if(root == null)
     //         return 0;
 
