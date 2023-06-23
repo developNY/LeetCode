@@ -2,22 +2,20 @@ class Solution {
     public List<List<String>> groupAnagrams(String[] strs) {
         Map<String, List<String>> map = new HashMap<>();
         for(String str : strs){
-            int[] arr = new int[26];
-            StringBuilder sb = new StringBuilder();
-            
+            int[] alphabet = new int[26];
             for(char c : str.toCharArray())
-                arr[c-'a']++;
+                alphabet[c - 'a']++;
+
+            StringBuilder result = new StringBuilder();
+            for(int i : alphabet)
+                result.append(i).append('.');
             
-            for(int i : arr){
-                sb.append("#");
-                sb.append(i);
-            }
+            String resultStr = result.toString();
             
-            if(!map.containsKey(sb.toString()))
-                map.put(sb.toString(), new ArrayList());
-            map.get(sb.toString()).add(str);
+            if(!map.containsKey(resultStr))
+                map.put(resultStr, new ArrayList<String>());
+            map.get(resultStr).add(str);
         }
-        
         return new ArrayList(map.values());
     }
 }
