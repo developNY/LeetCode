@@ -1,27 +1,29 @@
 class Solution {
     public int[] topKFrequent(int[] nums, int k) {
+        int[] result = new int[k];
         Map<Integer, Integer> map = new HashMap<>();
-        List<Integer> bucket[] = new ArrayList[nums.length + 1];                
-        
-        for(int num : nums)
-            map.put(num, map.getOrDefault(num, 0)+1);
+        Map<Integer, List<Integer>> reverse = new HashMap<>();
 
-        for (int key : map.keySet()){
-            int freq = map.get(key);
-            if (bucket[freq] == null)
-                bucket[freq] = new ArrayList<>();
-            bucket[freq].add(key);
+        for(int num : nums)
+            map.put(num, map.getOrDefault(num, 0) + 1);
+
+        for(Map.Entry<Integer, Integer> e : map.entrySet()){
+            if(!reverse.containsKey(e.getValue()))
+                reverse.put(e.getValue(), new ArrayList<>());
+            reverse.get(e.getValue()).add(e.getKey());
         }
-        
-        int index = 0;
-        int[] res = new int[k];
-        for (int i = nums.length; i >= 0; i--)
-            if (bucket[i] != null)
-                for (int val : bucket[i]){
-                    res[index++] = val;
-                    if(index == k)
-                        return res;
-                }
-        return res;
+        Object[] reverseKeys = reverse.keySet().toArray();
+        Arrays.sort(reverseKeys, Collections.reverseOrder());
+
+        int idx = 0;
+        for(Object i : reverseKeys){
+            if(idx >= k)
+                break;
+            List<Integer> list = reverse.get((int)i);
+            for(int e : list)
+                result[idx++] = e;
+        }
+
+        return result;
     }
 }
