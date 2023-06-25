@@ -1,48 +1,47 @@
 class Solution {
-    public boolean checkBox(int row, int col, char[][] board){
+    public boolean isValidBox(char[][] board, int i, int j){
         Set<Character> set = new HashSet<>();
-        for(int i=row; i<row+3; i++){
-            for(int j=col; j<col+3; j++){
-                if(board[i][j] != '.' && set.contains(board[i][j]))
-                    return false;
-                if(board[i][j] != '.')
-                    set.add(board[i][j]);
+        for(int ii=i; ii<i+3; ii++){
+            for(int jj=j; jj<j+3; jj++){
+                if(board[ii][jj] != '.'){
+                    if(set.contains(board[ii][jj]))
+                        return false;
+                    set.add(board[ii][jj]);
+                }
             }
         }
         return true;
     }
-    
-    public boolean isValidSudoku(char[][] board){
-        //row check
-        for(int i=0; i<board.length; i++){
+
+    public boolean isValidSudoku(char[][] board) {
+        for(int i=0; i<board[0].length; i++){
             Set<Character> set = new HashSet<>();
-            for(int j=0; j<board[0].length; j++){
-                if(board[i][j] != '.' && set.contains(board[i][j]))
-                    return false;
-                if(board[i][j] != '.')
+            for(int j=0; j<board.length; j++){
+                if(board[i][j] != '.'){
+                    if(set.contains(board[i][j]))
+                        return false;
                     set.add(board[i][j]);
+                }
             }
         }
-        
-        //col check
-        for(int i=0; i<board.length; i++){
+
+        for(int i=0; i<board[0].length; i++){
             Set<Character> set = new HashSet<>();
-            for(int j=0; j<board[0].length; j++){
-                if(board[j][i] != '.' && set.contains(board[j][i]))
-                    return false;
-                if(board[j][i] != '.')
+            for(int j=0; j<board.length; j++){
+                if(board[j][i] != '.'){
+                    if(set.contains(board[j][i]))
+                        return false;
                     set.add(board[j][i]);
+                }
             }
         }
-        
-        //3*3 check
-        for(int i=0; i<board.length; i=i+3){
-            for(int j=0; j<board[0].length; j=j+3){
-                if(!checkBox(i, j, board))
+
+        for(int i=0; i<board[0].length; i=i+3){
+            for(int j=0; j<board.length; j=j+3)
+                if(!isValidBox(board, i, j))
                     return false;
-            }
         }
-        
+
         return true;
     }
 }
