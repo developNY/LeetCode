@@ -1,28 +1,26 @@
-public class Codec {
+class Codec {
 
     // Encodes a list of strings to a single string.
     public String encode(List<String> strs) {
         StringBuilder sb = new StringBuilder();
-        
         for(String str : strs)
-            sb.append(str.length()).append("/").append(str);
-
+            sb.append(str.length()).append((char)257).append(str);
         return sb.toString();
     }
 
     // Decodes a single string to a list of strings.
     public List<String> decode(String s) {
-        int i=0;
-        List<String> result = new ArrayList<>();
+        int idx = 0;
+        List<String> list = new ArrayList<>();
         
-        while(i<s.length()){
-            int slash = s.indexOf('/', i);
-            int size = Integer.valueOf(s.substring(i, slash));
-            i = slash+size+1;
-            result.add(s.substring(slash+1, i));
+        while(s.length() > idx){
+            int deliminator = s.indexOf((char)257, idx);
+            int length = Integer.valueOf(s.substring(idx, deliminator));
+            idx = deliminator+1+length;
+            list.add(s.substring(deliminator+1, idx));
         }
         
-        return result;
+        return list;
     }
 }
 
