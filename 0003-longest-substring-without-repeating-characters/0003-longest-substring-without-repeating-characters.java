@@ -8,9 +8,12 @@ class Solution {
             set.add(s.charAt(i));
 
             while(end < s.length()){
-                if(set.contains(s.charAt(end)))
+                char c = s.charAt(end);
+                if(set.contains(c)){
+                    i = s.indexOf(c, i);
                     break;
-                set.add(s.charAt(end));
+                }
+                set.add(c);
                 end++;
             }
             maxLen = Math.max(maxLen, set.size());
